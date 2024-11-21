@@ -1,0 +1,23 @@
+<h1 class="font-bold">home</h1>
+
+<P class="font-bold">顯示迴圈索引</P>
+<ul>
+  <li *ngFor="let item of list; let key = index" >
+    <span *ngIf="key==2 || key==1" class="font-bold">{{ key }} --- {{ item.title }}</span>
+    <span *ngIf="key!=2 && key!=1">{{ key }} --- {{ item.title }}</span>
+  </li>
+</ul>
+
+<P class="font-bold">條件判斷語句：*ngIf</P>
+<button (click)="switch()" class="bg-amber-400 px-4 py-2 rounded-xl">切換</button>
+<div class="border rounded-xl grid-col-2 items-center">
+  <div *ngIf="flag" class="py-8 text-center">前</div>
+  <div *ngIf="flag" class="flex justify-center">
+    <img src="https://picsum.photos/200/300" alt="random image" class="rounded-xl">
+  </div>
+
+  <div *ngIf="!flag" class="py-8 text-center">後</div>
+  <div *ngIf="!flag" class="flex justify-center">
+    <img src="https://picsum.photos/200/600" alt="random image" class="rounded-xl">
+  </div>
+</div>
