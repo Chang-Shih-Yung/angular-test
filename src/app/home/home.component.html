@@ -2,22 +2,91 @@
 
 <P class="font-bold">顯示迴圈索引</P>
 <ul>
-  <li *ngFor="let item of list; let key = index" >
-    <span *ngIf="key==2 || key==1" class="font-bold">{{ key }} --- {{ item.title }}</span>
-    <span *ngIf="key!=2 && key!=1">{{ key }} --- {{ item.title }}</span>
+  <li *ngFor="let item of list; let key = index">
+    <span *ngIf="key == 2 || key == 1" class="font-bold"
+      >{{ key }} --- {{ item.title }}</span
+    >
+    <span *ngIf="key != 2 && key != 1">{{ key }} --- {{ item.title }}</span>
   </li>
 </ul>
 
 <P class="font-bold">條件判斷語句：*ngIf</P>
-<button (click)="switch()" class="bg-amber-400 px-4 py-2 rounded-xl">切換</button>
+<button (click)="switch()" class="bg-amber-400 px-4 py-2 rounded-xl">
+  切換
+</button>
 <div class="border rounded-xl grid-col-2 items-center">
   <div *ngIf="flag" class="py-8 text-center">前</div>
   <div *ngIf="flag" class="flex justify-center">
-    <img src="https://picsum.photos/200/300" alt="random image" class="rounded-xl">
+    <img
+      src="https://picsum.photos/200/300"
+      alt="random image"
+      class="rounded-xl"
+    />
   </div>
 
   <div *ngIf="!flag" class="py-8 text-center">後</div>
   <div *ngIf="!flag" class="flex justify-center">
-    <img src="https://picsum.photos/200/600" alt="random image" class="rounded-xl">
+    <img
+      src="https://picsum.photos/200/600"
+      alt="random image"
+      class="rounded-xl"
+    />
   </div>
 </div>
+
+<span [ngSwitch]="orderStatus">
+  <P class="font-bold">訂單詳情</P>
+  <br />
+  <P *ngSwitchCase="1" class="border">未付款</P>
+  <P *ngSwitchCase="2" class="border">已付款</P>
+  <P *ngSwitchCase="3" class="border">已出貨</P>
+  <P *ngSwitchCase="4" class="border">已完成</P>
+  <P *ngSwitchCase="5" class="border">取消</P>
+  <P *ngSwitchDefault class="border">準備中</P>
+</span>
+
+<!-- 直接看主控台，不管怎樣，在dom中就是要color:顏色 -->
+<!-- 以下都有相等 -->
+<p [style]="{ color: color }">44444</p>
+<p [style]="{ color }">66666</p>
+<p [style]="{ color: 'blue' }">222222</p>
+<p [style.color]="'yellow'">222222</p>
+<p [style]="{ color: color2[2] }">222222</p>
+<p [style]="{ color: color2[2] }">55555</p>
+<!-- color3是物件 -->
+<p [style]="color3">222222</p>
+<br />
+<p>管道用法</p>
+{{ today | date: "yyy-MM-dd HH:mm:ss" }}
+<br />
+<p>方法執行</p>
+<strong [style]="{ fontSize: '50px' }">{{ title }}</strong>
+<br />
+<button (click)="run()" class="w-12 h-8 border">GO</button>
+<p>執行方法獲取數據</p>
+<button (click)="getData()" class="w-12 h-8 border">GET</button>
+<p>執行方法改變數據</p>
+<button (click)="setData()" class="w-12 h-8 border">SET</button>
+
+<p>輸入事件</p>
+<!-- $event 是事件物件，它包含了有關事件的詳細資訊 -->
+<input (keydown)="keydown($event)" />
+<p>按鈕結果：{{ keyPressed }}</p>
+
+<button (click)="runEvent($event)" class="w-12 h-8 border">變色</button>
+<button (click)="runEvent2()" class="w-12 h-8 border" id="btn">變色2</button>
+<br />
+<br />
+<br />
+<p>MVVM雙向綁定：只是針對表單</p>
+<input type="text" [(ngModel)]="keywords " class="w-96 h-8 border"/>
+{{ keywords }}
+<br />
+<br />
+<p>改變值</p>
+<button (click)="changeValue()" class="w-40 h-8 border">點擊改變keywords的值</button>
+<br />
+<br />
+<p>查看值</p>
+<button (click)="watchValue() " class="w-40 h-8 border">點擊查看值的變化</button>
+
